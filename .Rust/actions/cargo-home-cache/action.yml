@@ -1,4 +1,4 @@
-name: Cache Cargo home
+name: Cargo home cache
 description: Cargo home Cache
 runs:
   using: composite
