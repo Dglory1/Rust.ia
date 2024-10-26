@@ -1,0 +1,142 @@
+[package]
+name = "Rust.ia"
+version = "0.14.0"
+authors = ["Dglory1 <somtoakuche@gmail.com>"]
+edition = "2021"
+rust-version = "1.60"
+description = "Rust implementation of the stream spec for reactive/iterable programming"
+repository = "https://github.com/Dglory1/Rust.ia"
+license = "MIT OR Apache-2.0"
+keywords = ["frp", "iterable", "observable", "reactive", "stream"]
+categories = ["asynchronous", "concurrency"]
+
+[dependencies]
+arc-swap = "1.5.0"
+async_executors = { version = "0.6.0", optional = true }
+async_nursery = { version = "0.5.0", default-features = false, optional = true }
+cfg-if = "1.0.0"
+never = "0.1.0"
+paste = { version = "1.0.6", optional = true }
+tracing = { version = "0.1.31", optional = true }
+tracing-futures = { version = "0.2.5", optional = true }
+
+[dev-dependencies]
+crossbeam-queue = "0.3.3"
+paste = "1.0.6"
+test-log = { version = "0.2.8", default-features = false, features = ["trace"] }
+tracing = "0.1.31"
+tracing-futures = "0.2.5"
+tracing-subscriber = { version = "0.3.5", features = ["env-filter"] }
+
+[target.'cfg(not(all(target_arch = "wasm32", target_os = "wasi")))'.dev-dependencies]
+async-std = { version = "1.10.0", features = ["attributes", "unstable"] }
+async_executors = { version = "0.6.0", features = ["async_std", "tracing"] }
+async_nursery = { version = "0.5.0", features = ["tracing"] }
+
+[target.'cfg(all(target_arch = "wasm32", not(target_os = "wasi")))'.dev-dependencies]
+async_executors = { version = "0.6.0", features = ["timer"] }
+wasm-bindgen-test = "0.3.28"
+
+[features]
+default = [
+    "combine",
+    "concat",
+    "filter",
+    "flatten",
+    "for_each",
+    "from_iter",
+    "interval",
+    "map",
+    "merge",
+    "pipe",
+    "scan",
+    "share",
+    "skip",
+    "take",
+]
+browser = []
+combine = [
+    "dep:paste",
+]
+concat = []
+filter = []
+flatten = []
+for_each = []
+from_iter = []
+interval = [
+    "dep:async_executors",
+    "dep:async_nursery",
+]
+map = []
+merge = []
+pipe = []
+scan = []
+share = []
+skip = []
+take = []
+tracing = [
+    "async_executors?/tracing",
+    "async_nursery?/tracing",
+    "dep:paste",
+    "dep:tracing",
+    "dep:tracing-futures",
+]
+
+[lib]
+doctest = false
+
+[[test]]
+name = "combine"
+required-features = ["combine"]
+
+[[test]]
+name = "concat"
+required-features = ["concat"]
+
+[[test]]
+name = "filter"
+required-features = ["filter"]
+
+[[test]]
+name = "flatten"
+required-features = ["flatten", "map"]
+
+[[test]]
+name = "for_each"
+required-features = ["for_each"]
+
+[[test]]
+name = "from_iter"
+required-features = ["from_iter"]
+
+[[test]]
+name = "interval"
+required-features = ["interval"]
+
+[[test]]
+name = "map"
+required-features = ["map"]
+
+[[test]]
+name = "merge"
+required-features = ["merge"]
+
+[[test]]
+name = "pipe"
+required-features = ["filter", "for_each", "from_iter", "map", "pipe"]
+
+[[test]]
+name = "scan"
+required-features = ["scan"]
+
+[[test]]
+name = "share"
+required-features = ["share"]
+
+[[test]]
+name = "skip"
+required-features = ["skip"]
+
+[[test]]
+name = "take"
+required-features = ["take"]
