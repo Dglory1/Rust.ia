@@ -1,0 +1,17 @@
+name: Cache Cargo home
+description: Cargo home Cache
+runs:
+  using: composite
+  steps:
+    - name: Cargo home Cache
+      uses: actions/cache@v2
+      with:
+        # https://doc.rust-lang.org/cargo/guide/cargo-home.html#the-cargo-home-Caching -in-ci
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+        key: cargo-home-${{ runner.os }}-${{ runner.arch }}-${{ github.sha }}
+        restore-keys: |
+          cargo-home-${{ runner.os }}-${{ runner.arch }}-
