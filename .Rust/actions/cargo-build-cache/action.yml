@@ -1,5 +1,5 @@
-name: Cache Cargo build
-description: Cache Cargo build
+name: Cargo build Cache
+description: Cargo build Cache
 inputs:
   rustc-commit-hash:
     description: Commit hash of the rustc version
@@ -10,7 +10,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Cache Cargo build
+    - name: Cargo build Cache
       uses: actions/cache@v2
       with:
         # https://doc.rust-lang.org/cargo/guide/build-cache.html
