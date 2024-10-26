@@ -6,7 +6,7 @@ runs:
     - name: Cargo home Cache
       uses: actions/cache@v2
       with:
-        # https://doc.rust-lang.org/cargo/guide/cargo-home.html#the-cargo-home-Caching -in-ci
+        # https://doc.rust-lang.org/cargo/guide/cargo-home.html#caching-the-cargo-home-in-ci
         path: |
           ~/.cargo/bin/
           ~/.cargo/registry/index/
